@@ -6,15 +6,22 @@ export default function Hero() {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToServices = () => {
+    const element = document.getElementById('services');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <div className="absolute inset-0 z-0">
         <img
-          src="/impact-herobg.jpeg"
+          src="/impact.jpeg"
           alt="LED Wall Event"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(24, 24, 24, 0.7))' }}></div>
+        <div className="absolute inset-0"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
@@ -33,16 +40,16 @@ export default function Hero() {
             onClick={scrollToContact}
             className="group gradient-gold text-black px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center gap-2 shadow-lg hover:shadow-yellow-500/30"
           >
-            Richiedi un Preventivo
+            Contattaci Ora
             <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
           </button>
 
           <button
-            onClick={scrollToContact}
+            onClick={scrollToServices}
             className="group bg-white/10 hover:bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center gap-2"
           >
             <Phone size={20} />
-            Contattaci Ora
+            Scopri di più
           </button>
         </div>
 

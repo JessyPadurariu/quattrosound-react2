@@ -2,19 +2,19 @@ import { Award, Target, Users, Zap } from 'lucide-react';
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 bg-gradient-to-r from-cyan-300/40 to-blue-500/20 ">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Chi <span className="text-cyan-400">Siamo</span>
           </h2>
-          <div className="w-24 h-1 bg-cyan-400 mx-auto"></div>
+          <div className="w-24 h-1 bg-gray-400 mx-auto"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <img
-              src="/WhatsApp Image 2025-11-02 at 17.29.25 (4).jpeg"
+              src="/about.jpeg"
               alt="Event Setup"
               className="rounded-lg shadow-2xl"
             />

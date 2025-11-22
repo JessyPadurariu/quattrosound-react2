@@ -30,7 +30,6 @@ function App() {
         <Services />
         <Gallery />
         <Technology />
-        <Products />
         <Contact />
         <Footer />
 
