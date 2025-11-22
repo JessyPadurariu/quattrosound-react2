@@ -17,8 +17,8 @@
   body {
     @apply text-gray-200;
     background-color: rgb(24, 24, 24);
-    font-family: 'Open-sans', sans-serif;
-    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-optical-sizing: auto;
     font-weight: 500;
     line-height: 1.6;
   }
@@ -56,7 +56,7 @@
   }
 
   .text-gradient-blue {
-    background: linear-gradient(135deg, #0082ff, #59d0ff);
+    background: linear-gradient(135deg, #59d0ff, #0082ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
