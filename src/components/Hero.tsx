@@ -14,13 +14,14 @@ export default function Hero() {
           alt="LED Wall Event"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(24, 24, 24, 0.6), rgba(24, 24, 24, 0.5), rgba(24, 24, 24, 0.7))' }}></div>
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(24, 24, 24, 0.7))' }}></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-          Sound & Lighting <br />
-          <span className="text-gradient-gold">Excellence</span>
+          <span className="text-gradient-blue">Sound & Lighting</span><br />
+          <span className="text-gradient-blue">Excellence</span>
+
         </h1>
 
         <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">

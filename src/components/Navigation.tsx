@@ -17,33 +17,33 @@ export default function Navigation({ onCartClick }: NavigationProps) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-gray-800" style={{ backgroundColor: 'rgba(24, 24, 24, 0.95)' }}>
+    <nav className="fixed top-0 left-0 right-0 z-50 border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
             <h1 className="text-3xl font-bold text-white">
-              Quattro<span className="text-gradient-gold">Sound</span>
+              <span className="text-gradient-blue">QuattroSound</span>
             </h1>
           </div>
 
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <button onClick={() => scrollToSection('home')} className="text-gray-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('home')} className="text-white-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
                 Home
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('about')} className="text-white-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
                 Chi Siamo
               </button>
-              <button onClick={() => scrollToSection('services')} className="text-gray-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('services')} className="text-white-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
                 Servizi
               </button>
-              <button onClick={() => scrollToSection('gallery')} className="text-gray-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
+              <button onClick={() => scrollToSection('gallery')} className="text-white-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
                 Portfolio
               </button>
-              <button onClick={() => scrollToSection('products')} className="text-gray-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
+              {/* <button onClick={() => scrollToSection('products')} className="text-white-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
                 Shop
-              </button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
+              </button> */}
+              <button onClick={() => scrollToSection('contact')} className="text-white-400 hover:accent-gold transition-colors px-3 py-2 text-sm font-medium">
                 Contatti
               </button>
               {/* <button
@@ -83,30 +83,32 @@ export default function Navigation({ onCartClick }: NavigationProps) {
         </div>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden bg-gray-900 border-t border-gray-800">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <button onClick={() => scrollToSection('home')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
-              Home
-            </button>
-            <button onClick={() => scrollToSection('about')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
-              Chi Siamo
-            </button>
-            <button onClick={() => scrollToSection('services')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
-              Servizi
-            </button>
-            <button onClick={() => scrollToSection('gallery')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
-              Portfolio
-            </button>
-            <button onClick={() => scrollToSection('products')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
-              Shop
-            </button>
-            <button onClick={() => scrollToSection('contact')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
-              Contatti
-            </button>
+      {
+        isOpen && (
+          <div className="md:hidden bg-gray-900 border-t border-gray-800">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <button onClick={() => scrollToSection('home')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
+                Home
+              </button>
+              <button onClick={() => scrollToSection('about')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
+                Chi Siamo
+              </button>
+              <button onClick={() => scrollToSection('services')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
+                Servizi
+              </button>
+              <button onClick={() => scrollToSection('gallery')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
+                Portfolio
+              </button>
+              <button onClick={() => scrollToSection('products')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
+                Shop
+              </button>
+              <button onClick={() => scrollToSection('contact')} className="text-gray-400 hover:accent-gold block px-3 py-2 text-base font-medium w-full text-left">
+                Contatti
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-    </nav>
+        )
+      }
+    </nav >
   );
 }
