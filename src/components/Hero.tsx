@@ -59,7 +59,7 @@ export default function Hero() {
             <div className="text-gray-300">Anni di Esperienza</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold accent-gold mb-2">500+</div>
+            <div className="text-4xl font-bold accent-gold mb-2">50+</div>
             <div className="text-gray-300">Eventi Realizzati</div>
           </div>
           <div className="text-center">
