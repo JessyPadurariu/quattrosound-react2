@@ -49,7 +49,7 @@ export default function Navigation({ onCartClick }: NavigationProps) {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <h1 className="flex items-center text-3xl font-bold text-white">
-              <img className="w-24 py-4" src="/logo-prov.png" alt="logo" />
+              <img className="w-24 py-4" src="/white-logo.png" alt="logo" />
               {/* <span className="text-gradient-blue">QuattroSound</span> */}
             </h1>
           </div>
