@@ -2,12 +2,15 @@ import { Facebook, Instagram, Linkedin, Youtube, Phone, Mail } from 'lucide-reac
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-blue-900 to-cyan-900 rounded-t-xl">
+    <footer className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 rounded-t-xl">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold text-white mb-4">
-              Quattro<span className="text-gradient-gold">Sound</span>
+              <div className="flex items-center">
+                <img className="w-24" src="/logo-prov.png" alt="logo" />
+                Quattro<span className="text-gradient-gold">Sound</span>
+              </div>
             </h3>
             <p className="text-gray-400 mb-6 leading-relaxed">
               Leader nel noleggio e installazione di Ledwall e impianti audio professionali.

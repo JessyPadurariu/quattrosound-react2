@@ -11,13 +11,14 @@ export default function Technology() {
     ],
     audio: [
       'Midas',
-      'd&b audiotechnik',
+      'Behringer',
+      'Outline',
       'L-Acoustics',
       'Shure',
       'Sennheiser',
-      'Yamaha',
-      'Allen & Heath',
-      'Behringer'
+      'KME',
+      'Powersoft',
+
     ],
     lighting: [
       'Martin Professional',
@@ -28,7 +29,7 @@ export default function Technology() {
     ],
     video: [
       'Blackmagic Design',
-      'Roland',
+      'Macbook',
       'Barco',
       'Christie'
     ]
@@ -105,7 +106,7 @@ export default function Technology() {
             </div>
           </div>
 
-          <div className="bg-gray-800 rounded-lg p-8 border border-gray-700">
+          {/* <div className="bg-gray-800 rounded-lg p-8 border border-gray-700">
             <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
               <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center">
                 <CheckCircle2 className="text-cyan-400" size={24} />
@@ -122,7 +123,7 @@ export default function Technology() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg p-8 md:p-12 border border-cyan-500/20">
