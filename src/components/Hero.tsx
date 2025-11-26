@@ -38,7 +38,7 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
             onClick={scrollToContact}
-            className="group gradient-gold text-black px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center gap-2 shadow-lg hover:shadow-yellow-500/30"
+            className="group gradient-gold text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center gap-2 shadow-lg hover:shadow-yellow-500/30"
           >
             Contattaci Ora
             <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />

@@ -260,7 +260,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-700 text-white font-semibold py-4 px-6 rounded-lg transition-all flex items-center justify-center gap-2 text-lg"
+                    className="w-full bg-cyan-500 gradient-gold hover:bg-cyan-600 disabled:bg-gray-700 text-white font-semibold py-4 px-6 rounded-lg transition-all flex items-center justify-center gap-2 text-lg"
                   >
                     {isSubmitting ? (
                       <>

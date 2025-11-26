@@ -111,7 +111,7 @@ export default function Gallery() {
               const element = document.getElementById('contact');
               element?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all inline-flex items-center gap-2"
+            className="bg-cyan-500 gradient-gold hover:bg-cyan-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all inline-flex items-center gap-2"
           >
             Richiedi il Portfolio Completo
           </button>
