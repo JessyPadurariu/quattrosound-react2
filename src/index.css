@@ -72,3 +72,9 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.bg-contact {
+  background-image: url("/impact2.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

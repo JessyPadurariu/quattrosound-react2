@@ -19,7 +19,7 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbwA-OaXpYf5ho1k8MWTPdFSfE9QFPEfkAcg3nuq6ueb5UPPRO6OlpRP3oXuLITfvt_TtA/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbzThyYaYTkQePH3MdrqZ7dxpARqm2m1mDuqCVY6frN-z-1Of5A2im53AsYMOCbsuiwpvA/exec", {
         method: "POST",
         body: new FormData(e.target),
       });
@@ -55,7 +55,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-gray-800">
+    <section id="contact" className="py-24 bg-gray-900 bg-contact">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -139,7 +139,7 @@ export default function Contact() {
           </div>
 
           <div className="lg:col-span-3">
-            <form action="https://script.google.com/macros/s/AKfycbwA-OaXpYf5ho1k8MWTPdFSfE9QFPEfkAcg3nuq6ueb5UPPRO6OlpRP3oXuLITfvt_TtA/exec" onSubmit={handleSubmit} className="bg-gray-900 rounded-lg p-8 border border-gray-700">
+            <form action="https://script.google.com/macros/s/AKfycbwA-OaXpYf5ho1k8MWTPdFSfE9QFPEfkAcg3nuq6ueb5UPPRO6OlpRP3oXuLITfvt_TtA/exec" onSubmit={handleSubmit} className="bg-gradient-to-r from-blue-800/20 to-cyan-700/20 backdrop-blur rounded-lg p-8 border border-gray-700">
               {submitted ? (
                 <div className="text-center py-12">
                   <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">

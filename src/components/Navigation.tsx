@@ -1,6 +1,7 @@
 import { Menu, X, ShoppingCart } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
+
 
 interface NavigationProps {
   onCartClick: () => void;
@@ -9,12 +10,38 @@ interface NavigationProps {
 export default function Navigation({ onCartClick }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { itemCount } = useCart();
+  const [activeSection, setActiveSection] = useState<string>('home');
+
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section');
+      let current = 'home';
+
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const offset = window.innerHeight / 3; // trigger prima che la sezione sia tutta visibile
+        if (sectionTop <= offset) {
+          current = section.id;
+        }
+      });
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // set iniziale
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const getButtonClasses = (id: string, baseClasses: string) =>
+    `${baseClasses} ${activeSection === id ? 'bg-orange-500 text-black rounded-full' : ''}`;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-gray-800">
