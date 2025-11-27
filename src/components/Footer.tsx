@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Linkedin, Youtube, Phone, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -52,36 +53,24 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Link Rapidi</h4>
             <ul className="space-y-3">
               <li>
-                <button
-                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-gray-400 hover:text-cyan-400 transition-colors"
-                >
+                <Link to="/about" className="text-gray-400 hover:text-cyan-400 transition-colors">
                   Chi Siamo
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-gray-400 hover:text-cyan-400 transition-colors"
-                >
+                <Link to="/services" className="text-gray-400 hover:text-cyan-400 transition-colors">
                   Servizi
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-gray-400 hover:text-cyan-400 transition-colors"
-                >
+                <Link to="/portfolio" className="text-gray-400 hover:text-cyan-400 transition-colors">
                   Portfolio
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="text-gray-400 hover:text-cyan-400 transition-colors"
-                >
-                  Shop
-                </button>
+                <Link to="/contacts" className="text-gray-400 hover:text-cyan-400 transition-colors">
+                  Contatti
+                </Link>
               </li>
             </ul>
           </div>
@@ -110,15 +99,15 @@ export default function Footer() {
             &copy; 2025 @QuattroSound. | Tutti i diritti riservati.
           </p>
           <div className="flex gap-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-cyan-400 transition-colors">
+            <Link to="/privacy-policy" className="hover:text-cyan-400 transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-cyan-400 transition-colors">
+            </Link>
+            <Link to="/cookie-policy" className="hover:text-cyan-400 transition-colors">
               Cookie Policy
-            </a>
-            <a href="#" className="hover:text-cyan-400 transition-colors">
+            </Link>
+            <Link to="/terms" className="hover:text-cyan-400 transition-colors">
               Termini e Condizioni
-            </a>
+            </Link>
           </div>
         </div>
       </div>
