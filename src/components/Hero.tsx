@@ -24,7 +24,7 @@ export default function Hero() {
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8))' }}></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-12 lg:px-8 py-32 text-center">
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
           <span className="text-gradient-blue">Sound & Lighting</span><br />
           <span className="text-gradient-blue">Excellence</span>

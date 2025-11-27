@@ -45,12 +45,12 @@ export default function Navigation({ onCartClick }: NavigationProps) {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-gray-800">
-      <div className="mx-8 px-8 py-4 my-4 sm:mx-8 sm:pl-4 sm:pr-8 md:px-8 md:mx-8 lg:px-16 xl:mx-24 2xl:mx-64 rounded-full bg-gradient-to-r from-cyan-400/10 to-blue-400/10 backdrop-blur ">
+      <div className="mx-2 px-4 py-2 my-2 sm:mx-2 sm:pl-4 sm:pr-8  md:px-8 md:mx-8 lg:px-16 xl:mx-24 2xl:mx-64 2xl:py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-blue-400/10 backdrop-blur ">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <h1 className="flex items-center text-3xl font-bold text-white">
-              <img className="w-24 py-4" src="/white-logo.png" alt="logo" />
-              {/* <span className="text-gradient-blue">QuattroSound</span> */}
+              <img className="w-20 py-4" src="/white-logo.png" alt="logo" />
+              <span className="text-gradient-blue text-sm">QuattroSound</span>
             </h1>
           </div>
 
