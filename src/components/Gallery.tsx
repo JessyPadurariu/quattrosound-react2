@@ -1,120 +1,96 @@
-import { useState } from 'react';
-import { X } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const projects = [
-    {
-      image: '/impact.jpeg',
-      title: 'Evento Impactful',
-      description: 'Grande schermo LED e regia professionale per evento corporate',
-      category: 'Conferenze'
-    },
-    {
-      image: '/impact2.jpeg',
-      title: 'Convention Internazionale',
-      description: 'Multiple schermi LED e setup audio completo per evento multi-sala',
-      category: 'Eventi Aziendali'
-    },
-    {
-      image: '/impact3.jpeg',
-      title: 'Setup Palco Professionale',
-      description: 'Illuminazione, LED wall e impianto audio line array per concerto live',
-      category: 'Concerti'
-    },
-    {
-      image: '/impact4.jpeg',
-      title: 'Orchestra Live',
-      description: 'Microfonazione orchestrale e impianto audio di precisione',
-      category: 'Concerti'
-    },
-    {
-      image: '/impact5.jpeg',
-      title: 'Sistema Lighting Avanzato',
-      description: 'Traliccio motorizzato con luci intelligenti e controllo DMX',
-      category: 'Lighting'
-    },
-    {
-      image: '/impact6.jpeg',
-      title: 'Evento di Prestigio',
-      description: 'Palco completo con LED wall e illuminazione coordinata',
-      category: 'Concerti'
-    },
-    {
-      image: '/impact7.jpeg',
-      title: 'Setup Audio Professionale',
-      description: 'Sistema audio line array con microfonazione wireless',
-      category: 'Audio'
-    },
-    {
-      image: '/impact8.jpeg',
-      title: 'Evento Corporate Premium',
-      description: 'LED wall gigante e regia tecnica completa',
-      category: 'Eventi Aziendali'
-    },
-    {
-      image: '/impact9.jpeg',
-      title: 'Concerto Live',
-      description: 'Setup completo con schermi LED e audio professionale',
-      category: 'Concerti'
-    }
+    { image: '/impact.jpeg', title: 'Evento Corporate', category: 'Conferenze' },
+    { image: '/impact2.jpeg', title: 'Convention Internazionale', category: 'Eventi Aziendali' },
+    { image: '/impact3.jpeg', title: 'Setup Palco Professionale', category: 'Concerti' },
+    { image: '/impact4.jpeg', title: 'Orchestra Live', category: 'Concerti' },
+    { image: '/impact5.jpeg', title: 'Sistema Lighting Avanzato', category: 'Lighting' },
+    { image: '/impact6.jpeg', title: 'Evento di Prestigio', category: 'Concerti' },
+    { image: '/impact7.jpeg', title: 'Setup Audio Professionale', category: 'Audio' },
+    { image: '/impact8.jpeg', title: 'Evento Corporate Premium', category: 'Eventi Aziendali' },
+    { image: '/impact9.jpeg', title: 'Concerto Live', category: 'Concerti' },
   ];
 
+  const handleSelectImage = (image: string, index: number) => {
+    setSelectedImage(image);
+    setCurrentImageIndex(index);
+  };
+
+  const handlePrevImage = () => {
+    const newIndex = currentImageIndex === 0 ? projects.length - 1 : currentImageIndex - 1;
+    setSelectedImage(projects[newIndex].image);
+    setCurrentImageIndex(newIndex);
+  };
+
+  const handleNextImage = () => {
+    const newIndex = (currentImageIndex + 1) % projects.length;
+    setSelectedImage(projects[newIndex].image);
+    setCurrentImageIndex(newIndex);
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (selectedImage) {
+        if (e.key === 'ArrowLeft') handlePrevImage();
+        if (e.key === 'ArrowRight') handleNextImage();
+        if (e.key === 'Escape') setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [selectedImage, currentImageIndex]);
+
   return (
-    <section id="gallery" className="py-24 bg-gradient-to-r from-blue-500/20 to-cyan-500/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Il Nostro <span className="text-cyan-400">Portfolio</span>
-          </h2>
-          <div className="w-24 h-1 bg-cyan-400 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Scopri alcuni dei progetti che abbiamo realizzato con passione e dedizione
+    <section id="gallery" className="section-padding bg-gradient-to-br from-dark-900 to-dark-850">
+      <div className="section-container space-y-16">
+        <div className="text-center space-y-4">
+          <div className="inline-block separator" />
+          <h2>Il Nostro <span className="gradient-text">Portfolio</span></h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            Scopri i progetti che abbiamo realizzato con eccellenza e dedizione
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
+          {projects.map((project, idx) => (
             <div
-              key={index}
-              className="group relative overflow-hidden rounded-lg cursor-pointer"
-              onClick={() => setSelectedImage(project.image)}
+              key={idx}
+              className="group relative overflow-hidden rounded-xl cursor-pointer h-full"
+              onClick={() => handleSelectImage(project.image, idx)}
             >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
+              <img
+                src={project.image}
+                alt={project.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="inline-block bg-cyan-500 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                    {project.category}
-                  </span>
-                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-300 text-sm">{project.description}</p>
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="inline-block w-fit px-3 py-1 bg-accent-cyan/20 border border-accent-cyan/50 text-accent-cyan text-xs font-semibold rounded-full mb-3">
+                  {project.category}
+                </span>
+                <h3 className="text-lg font-bold text-white">{project.title}</h3>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <p className="text-gray-400 text-lg mb-8">
-            Hai bisogno di vedere altri esempi del nostro lavoro?
-          </p>
-          <button
-            onClick={() => {
-              const element = document.getElementById('contact');
-              element?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="bg-cyan-500 gradient-gold hover:bg-cyan-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all inline-flex items-center gap-2"
+        <div className="text-center pt-8">
+          <p className="text-gray-400 mb-6">Desideri vedere il portfolio completo?</p>
+          <a
+            href="/portfolio"
+            className="button-primary inline-block"
           >
-            Richiedi il Portfolio Completo
-          </button>
+            Visualizza Tutti i Progetti
+          </a>
         </div>
       </div>
 
@@ -124,17 +100,44 @@ export default function Gallery() {
           onClick={() => setSelectedImage(null)}
         >
           <button
-            className="absolute top-4 right-4 text-white hover:text-cyan-400 transition-colors"
+            className="absolute top-6 right-6 text-white hover:text-accent-cyan transition-colors z-10"
             onClick={() => setSelectedImage(null)}
           >
             <X size={32} />
           </button>
+
+          <button
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-accent-cyan transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePrevImage();
+            }}
+          >
+            <ChevronLeft size={32} />
+          </button>
+
           <img
             src={selectedImage}
             alt="Gallery"
-            className="max-w-full max-h-full object-contain"
+            className="max-w-full max-h-full object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()}
           />
+
+          <button
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-accent-cyan transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNextImage();
+            }}
+          >
+            <ChevronRight size={32} />
+          </button>
+
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4">
+            <span className="text-white text-sm">
+              {currentImageIndex + 1} / {projects.length}
+            </span>
+          </div>
         </div>
       )}
     </section>

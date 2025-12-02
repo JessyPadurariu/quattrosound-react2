@@ -1,12 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Stack+Sans+Notch:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Clash+Display:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-dark: #181818;
-  --color-gold-light: #D4AF37;
-  --color-gold-dark: #AA8C2C;
+  --color-dark-900: #0f0f0f;
+  --color-dark-850: #1a1a1a;
+  --color-dark-800: #262626;
+  --color-accent-cyan: #00d9ff;
+  --color-accent-electric: #0084ff;
+  --color-accent-emerald: #10b981;
+  --color-accent-copper: #d97706;
 }
 
 @layer base {
@@ -15,12 +20,12 @@
   }
 
   body {
-    @apply text-gray-200;
-    background-color: rgb(24, 24, 24);
-    font-family: 'Montserrat', sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
+    @apply text-gray-300 bg-dark-900;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -29,53 +34,116 @@
   h4,
   h5,
   h6 {
-    font-family: 'Audiowide', sans-serif;
+    font-family: 'Clash Display', system-ui, sans-serif;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.02em;
+    @apply text-white;
   }
 
   h1 {
-    font-size: 3.5rem;
-    font-weight: 900;
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold;
   }
 
   h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
+    @apply text-4xl md:text-5xl font-bold;
   }
 
   h3 {
-    font-size: 1.875rem;
-    font-weight: 700;
+    @apply text-2xl md:text-3xl font-bold;
+  }
+
+  p {
+    @apply text-gray-400;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .glass-sm {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10;
+  }
+
+  .button-primary {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply bg-gradient-to-r from-accent-cyan to-accent-electric text-black;
+    @apply hover:shadow-lg hover:shadow-accent-cyan/50 hover:-translate-y-0.5;
+  }
+
+  .button-secondary {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply bg-white/10 text-white border border-white/20;
+    @apply hover:bg-white/20 hover:border-white/40;
+  }
+
+  .button-ghost {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply text-gray-300 hover:text-white hover:bg-white/5;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg-dark;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-32;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent-cyan via-accent-electric to-accent-emerald bg-clip-text text-transparent;
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-r from-accent-cyan to-accent-electric;
+  }
+
+  .separator {
+    @apply w-12 h-1 bg-gradient-to-r from-accent-cyan to-accent-electric rounded-full;
   }
 }
 
 @layer utilities {
-  .gradient-gold {
-    background: linear-gradient(135deg, #59d0ff, #0082ff);
+  .backdrop-blur-xl {
+    backdrop-filter: blur(40px);
   }
 
-  .text-gradient-blue {
-    background: linear-gradient(135deg, #59d0ff, #0082ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .text-balance {
+    text-wrap: balance;
   }
 
-  .accent-gold {
-    color: #59d0ff;
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.audiowide-regular {
-  font-family: "Audiowide", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-.bg-contact {
-  background-image: url("/impact.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  backdrop-filter: blur(100px);
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }

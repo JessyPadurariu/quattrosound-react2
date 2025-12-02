@@ -1,83 +1,110 @@
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  const scrollToServices = () => {
-    const element = document.getElementById('services');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!contentRef.current || !containerRef.current) return;
 
+      const scrolled = window.scrollY;
+      contentRef.current.style.transform = `translateY(${scrolled * 0.5}px)`;
+    };
 
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/impact3.jpeg"
-          alt="LED Wall Event"
-          className="w-full h-full object-cover"
+    <section
+      ref={containerRef}
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-24"
+    >
+      <div className="absolute inset-0 -z-10">
+        <div
+          className="absolute inset-0 opacity-40"
+          style={{
+            backgroundImage: 'url(/impact3.jpeg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+          }}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8))' }}></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-900/40 via-dark-900/60 to-dark-900" />
+
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-accent-cyan/10 rounded-full blur-3xl opacity-30" />
+        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-accent-electric/10 rounded-full blur-3xl opacity-20" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-12 lg:px-8 py-32 text-center">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-          <span className="text-gradient-blue">Sound & Lighting</span><br />
-          <span className="text-gradient-blue">Excellence</span>
-
-        </h1>
-
-        <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-          Noleggio e installazione di schermi LED e impianti audio di alta qualità per concerti, conferenze, fiere, matrimoni ed eventi aziendali
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button
-            onClick={scrollToContact}
-            className="group gradient-gold text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center gap-2 shadow-lg hover:shadow-yellow-500/30"
-          >
-            Contattaci Ora
-            <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-          </button>
-
-          <button
-            onClick={scrollToServices}
-            className="group bg-white/10 hover:bg-white/20 text-white border-2 border-white/40 px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center gap-2"
-          >
-            <Phone size={20} />
-            Scopri di più
-          </button>
-        </div>
-
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="text-4xl font-bold accent-gold mb-2">15+</div>
-            <div className="text-gray-300">Anni di Esperienza</div>
+      <div ref={contentRef} className="relative z-10 section-container">
+        <div className="space-y-8 text-center">
+          <div className="inline-block">
+            <div className="glass px-4 py-2 rounded-full text-sm font-medium text-accent-cyan flex items-center gap-2">
+              <Zap size={16} />
+              Audio & Lighting Excellence
+            </div>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold accent-gold mb-2">50+</div>
-            <div className="text-gray-300">Eventi Realizzati</div>
+
+          <div className="space-y-6">
+            <h1 className="text-balance leading-tight">
+              Trasforma ogni evento in
+              <span className="gradient-text"> un'esperienza indimenticabile</span>
+            </h1>
+
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto text-balance leading-relaxed">
+              Leader nel noleggio e installazione di schermi LED e impianti audio professionali.
+              Dal design al supporto tecnico completo per concerti, conferenze e eventi aziendali.
+            </p>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold accent-gold mb-2">24/7</div>
-            <div className="text-gray-300">Supporto Tecnico</div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+            <Link
+              to="/contacts"
+              className="button-primary inline-flex items-center gap-2 group"
+            >
+              Scopri i Nostri Servizi
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            <a
+              href="tel:+393208980405"
+              className="button-secondary inline-flex items-center gap-2"
+            >
+              <Zap size={20} />
+              Contattaci Subito
+            </a>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold accent-gold mb-2">100%</div>
-            <div className="text-gray-300">Soddisfazione</div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12">
+            {[
+              { number: '15+', label: 'Anni di Esperienza' },
+              { number: '500+', label: 'Eventi Realizzati' },
+              { number: '24/7', label: 'Supporto Tecnico' },
+              { number: '100%', label: 'Soddisfazione' }
+            ].map((stat, idx) => (
+              <div key={idx} className="space-y-2">
+                <div className="text-4xl md:text-5xl font-bold gradient-text">
+                  {stat.number}
+                </div>
+                <p className="text-gray-400 text-sm md:text-base">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-          <div className="w-1.5 h-1.5 bg-white/50 rounded-full"></div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+        <div className="animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2 hover:border-accent-cyan transition-colors">
+            <div className="w-1 h-2 bg-white/50 rounded-full" />
+          </div>
         </div>
       </div>
-    </section >
+    </section>
   );
 }

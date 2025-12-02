@@ -1,7 +1,6 @@
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
 
 interface NavigationProps {
   onCartClick: () => void;
@@ -9,8 +8,16 @@ interface NavigationProps {
 
 export default function Navigation({ onCartClick }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { itemCount } = useCart();
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isActiveLink = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
@@ -18,71 +25,86 @@ export default function Navigation({ onCartClick }: NavigationProps) {
     return false;
   };
 
+  const navItems = [
+    { label: 'Home', path: '/' },
+    { label: 'Chi Siamo', path: '/about' },
+    { label: 'Servizi', path: '/services' },
+    { label: 'Portfolio', path: '/portfolio' },
+    { label: 'Contatti', path: '/contacts' },
+  ];
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-gray-800">
-      <div className="mx-2 px-4 py-2 my-2 sm:mx-2 sm:pl-4 sm:pr-8  md:px-8 md:mx-8 lg:px-16 xl:mx-24 2xl:mx-64 2xl:py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-blue-400/10 backdrop-blur ">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center text-3xl font-bold text-white">
-              <img className="w-20 py-4" src="/white-logo.png" alt="logo" />
-              <span className="text-gradient-blue text-sm">QuattroSound</span>
-            </Link>
-          </div>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'glass py-3 md:py-4'
+          : 'bg-transparent py-6 md:py-8'
+      }`}
+    >
+      <div className="section-container flex items-center justify-between">
+        <Link
+          to="/"
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+        >
+          <img src="/white-logo.png" alt="QuattroSound" className="h-10 md:h-12 w-auto" />
+          <span className="font-display text-xl md:text-2xl font-bold gradient-text hidden sm:block">
+            QuattroSound
+          </span>
+        </Link>
 
-          <div className="hidden lg:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              <Link to="/" className={`audiowide-regular hover:accent-gold transition-colors px-3 py-2 text-sm font-medium ${isActiveLink('/') ? 'accent-gold' : 'text-white-400'}`}>
-                Home
+        <div className="hidden lg:block">
+          <div className="flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`text-sm font-medium transition-colors ${
+                  isActiveLink(item.path)
+                    ? 'text-accent-cyan font-semibold'
+                    : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                {item.label}
               </Link>
-              <Link to="/about" className={`audiowide-regular hover:accent-gold transition-colors px-3 py-2 text-sm font-medium ${isActiveLink('/about') ? 'accent-gold' : 'text-white-400'}`}>
-                Chi Siamo
-              </Link>
-              <Link to="/services" className={`audiowide-regular hover:accent-gold transition-colors px-3 py-2 text-sm font-medium ${isActiveLink('/services') ? 'accent-gold' : 'text-white-400'}`}>
-                Servizi
-              </Link>
-              <Link to="/portfolio" className={`audiowide-regular hover:accent-gold transition-colors px-3 py-2 text-sm font-medium ${isActiveLink('/portfolio') ? 'accent-gold' : 'text-white-400'}`}>
-                Portfolio
-              </Link>
-              <Link to="/contacts" className={`audiowide-regular hover:accent-gold transition-colors px-3 py-2 text-sm font-medium ${isActiveLink('/contacts') ? 'accent-gold' : 'text-white-400'}`}>
-                Contatti
-              </Link>
-            </div>
+            ))}
           </div>
+        </div>
 
-          <div className="lg:hidden flex items-center gap-4">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-400 hover:accent-gold"
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+        <div className="flex items-center gap-4">
+          <a
+            href="tel:+393208980405"
+            className="hidden sm:block button-secondary text-sm"
+          >
+            Chiamaci
+          </a>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden text-white hover:text-accent-cyan transition-colors"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
 
-      {
-        isOpen && (
-          <div className="lg:hidden  bg-gradient-to-r from-blue-900/90 to-cyan-700/90 border-t border-gray-800 px-8 mx-8 rounded-xl">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link to="/" onClick={() => setIsOpen(false)} className={`audiowide-regular hover:accent-gold block px-3 py-2 text-base font-medium ${isActiveLink('/') ? 'accent-gold' : 'text-gray-400'}`}>
-                Home
-              </Link>
-              <Link to="/about" onClick={() => setIsOpen(false)} className={`audiowide-regular hover:accent-gold block px-3 py-2 text-base font-medium ${isActiveLink('/about') ? 'accent-gold' : 'text-gray-400'}`}>
-                Chi Siamo
-              </Link>
-              <Link to="/services" onClick={() => setIsOpen(false)} className={`audiowide-regular hover:accent-gold block px-3 py-2 text-base font-medium ${isActiveLink('/services') ? 'accent-gold' : 'text-gray-400'}`}>
-                Servizi
-              </Link>
-              <Link to="/portfolio" onClick={() => setIsOpen(false)} className={`audiowide-regular hover:accent-gold block px-3 py-2 text-base font-medium ${isActiveLink('/portfolio') ? 'accent-gold' : 'text-gray-400'}`}>
-                Portfolio
-              </Link>
-              <Link to="/contacts" onClick={() => setIsOpen(false)} className={`audiowide-regular hover:accent-gold block px-3 py-2 text-base font-medium ${isActiveLink('/contacts') ? 'accent-gold' : 'text-gray-400'}`}>
-                Contatti
-              </Link>
-            </div>
-          </div>
-        )
-      }
-    </nav >
+      {isOpen && (
+        <div className="lg:hidden mt-4 glass m-4 rounded-xl p-4 space-y-3">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={() => setIsOpen(false)}
+              className={`block px-4 py-2 rounded-lg transition-colors ${
+                isActiveLink(item.path)
+                  ? 'bg-accent-cyan/20 text-accent-cyan font-semibold'
+                  : 'text-gray-300 hover:bg-white/5'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 }

@@ -1,107 +1,160 @@
 import { Monitor, Volume2, Cable, Headphones, Truck, Wrench } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const ServiceCard = ({ icon: Icon, title, description, features, index }: {
+  icon: React.ComponentType<any>;
+  title: string;
+  description: string;
+  features: string[];
+  index: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setIsVisible(true), index * 100);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [index]);
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-500 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+    >
+      <div className="glass rounded-xl p-8 h-full hover:glass-sm transition-all group hover:-translate-y-1">
+        <div className="w-12 h-12 bg-gradient-to-br from-accent-cyan/30 to-accent-electric/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <Icon className="text-accent-cyan" size={24} />
+        </div>
+
+        <h3 className="text-xl font-bold mb-3">{title}</h3>
+        <p className="text-gray-400 text-sm leading-relaxed mb-6">{description}</p>
+
+        <ul className="space-y-3">
+          {features.map((feature, idx) => (
+            <li key={idx} className="flex items-start gap-3 text-sm text-gray-300">
+              <div className="w-1.5 h-1.5 bg-accent-cyan rounded-full mt-1.5 flex-shrink-0" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
 
 export default function Services() {
   const services = [
     {
       icon: Monitor,
       title: 'Noleggio LED Wall',
-      description: 'Schermi LED di ogni dimensione per interni ed esterni, con risoluzioni HD e 4K. Ideali per concerti, conferenze, fiere e presentazioni aziendali.',
+      description: 'Schermi LED ad alte prestazioni per interni ed esterni con risoluzioni fino a 4K',
       features: ['Indoor & Outdoor', 'Risoluzioni fino a 4K', 'Dimensioni personalizzabili', 'Massima luminosità']
     },
     {
       icon: Volume2,
       title: 'Impianti Audio Professionali',
-      description: 'Sistemi audio line array e point source delle migliori marche, progettati per garantire una copertura sonora perfetta in ogni ambiente.',
+      description: 'Sistemi audio line array dalle migliori marche internazionali',
       features: ['Line Array Systems', 'Mixer digitali', 'Microfonazione wireless', 'Acustica ottimizzata']
     },
     {
       icon: Cable,
       title: 'Installazione e Cablaggio',
-      description: 'Montaggio professionale di tutte le attrezzature con cablaggio ordinato e sicuro secondo le normative vigenti.',
+      description: 'Montaggio professionale con cablaggio ordinato secondo le normative',
       features: ['Montaggio certificato', 'Cablaggio professionale', 'Test pre-evento', 'Documentazione tecnica']
     },
     {
       icon: Headphones,
       title: 'Supporto Tecnico On-Site',
-      description: 'Tecnici specializzati presenti durante tutto l\'evento per gestire audio, video e risolvere qualsiasi imprevisto.',
+      description: 'Team tecnico specializzato presente durante l\'intero evento',
       features: ['Presenza costante', 'Regia audio/video', 'Troubleshooting rapido', 'Consulenza live']
     },
     {
       icon: Truck,
       title: 'Trasporto e Logistica',
-      description: 'Servizio completo di trasporto, carico e scarico delle attrezzature con mezzi idonei e personale qualificato.',
+      description: 'Servizio completo di trasporto e movimentazione attrezzature',
       features: ['Mezzi attrezzati', 'Assicurazione completa', 'Puntualità garantita', 'Gestione ritiro']
     },
     {
       icon: Wrench,
       title: 'Manutenzione Preventiva',
-      description: 'Tutte le nostre attrezzature sono sottoposte a controlli regolari e manutenzione preventiva per garantire affidabilità assoluta.',
+      description: 'Controlli regolari e manutenzione per garantire affidabilità',
       features: ['Check completi', 'Attrezzature certificate', 'Backup disponibili', 'Affidabilità 100%']
     }
   ];
 
   return (
-    <section id="services" className="py-24">
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/impact3.jpeg"
-          alt="LED Wall Event"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8))' }}></div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            I Nostri <span className="text-cyan-400">Servizi</span>
-          </h2>
-          <div className="w-24 h-1 bg-cyan-400 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Soluzioni complete per eventi di successo: dal noleggio all'assistenza tecnica
+    <section id="services" className="section-padding bg-dark-900">
+      <div className="section-container space-y-20">
+        <div className="text-center space-y-4">
+          <div className="inline-block separator" />
+          <h2>I Nostri <span className="gradient-text">Servizi</span></h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            Soluzioni complete e integrate per il successo del tuo evento
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="bg-gray-800 rounded-lg p-8 border border-gray-700 hover:border-cyan-400 transition-all group hover:shadow-xl hover:shadow-cyan-500/10"
-            >
-              <div className="w-16 h-16 bg-cyan-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-cyan-500/20 transition-colors group-hover:scale-110 transform duration-300">
-                <service.icon className="text-cyan-400" size={32} />
-              </div>
-
-              <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-              <p className="text-gray-400 mb-6 leading-relaxed">{service.description}</p>
-
-              <ul className="space-y-3">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-gray-300">
-                    <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full mr-3"></div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, idx) => (
+            <ServiceCard key={idx} {...service} index={idx} />
           ))}
         </div>
 
-        <div className="mt-16 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg p-8 md:p-12 border border-cyan-500/20">
-          <div className="text-center">
-            <h3 className="text-3xl font-bold text-white mb-4">
-              Eventi Chiavi in Mano
-            </h3>
-            <p className="text-lg text-gray-300 mb-8 max-w-3xl mx-auto">
-              Gestiamo ogni aspetto tecnico del tuo evento: dalla progettazione iniziale alla realizzazione finale.
-              Ti liberiamo da ogni preoccupazione tecnica così puoi concentrarti sul successo del tuo evento.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <span className="bg-gray-800 px-6 py-3 rounded-lg text-cyan-400 font-semibold">Concerti</span>
-              <span className="bg-gray-800 px-6 py-3 rounded-lg text-cyan-400 font-semibold">Conferenze</span>
-              <span className="bg-gray-800 px-6 py-3 rounded-lg text-cyan-400 font-semibold">Fiere</span>
-              <span className="bg-gray-800 px-6 py-3 rounded-lg text-cyan-400 font-semibold">Matrimoni</span>
-              <span className="bg-gray-800 px-6 py-3 rounded-lg text-cyan-400 font-semibold">Eventi Aziendali</span>
-              <span className="bg-gray-800 px-6 py-3 rounded-lg text-cyan-400 font-semibold">Chiese</span>
+        <div className="mt-20 pt-12 border-t border-white/10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h3>Gestione Completa dell'Evento</h3>
+              <p className="text-gray-400 leading-relaxed">
+                Dalla consulenza iniziale alla realizzazione finale, gestiamo ogni aspetto tecnico del tuo evento.
+                Non devi preoccuparti di nulla, noi ci pensiamo a tutto.
+              </p>
+
+              <div className="space-y-4 pt-4">
+                {['Concerti', 'Conferenze', 'Fiere', 'Matrimoni', 'Eventi Aziendali', 'Chiese'].map((event) => (
+                  <div key={event} className="flex items-center gap-3 text-gray-300">
+                    <div className="w-2 h-2 bg-gradient-accent rounded-full" />
+                    {event}
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                to="/services"
+                className="button-primary inline-block mt-6"
+              >
+                Scopri Tutti i Servizi
+              </Link>
+            </div>
+
+            <div className="relative">
+              <div className="absolute -inset-4 gradient-accent rounded-2xl opacity-15 blur-2xl" />
+              <div className="relative glass rounded-2xl p-8 space-y-6">
+                <div>
+                  <div className="text-4xl font-bold gradient-text mb-2">24/7</div>
+                  <p className="text-sm text-gray-400">Supporto tecnico sempre disponibile</p>
+                </div>
+
+                <div className="border-t border-white/10 pt-6">
+                  <div className="text-3xl font-bold gradient-text mb-2">100%</div>
+                  <p className="text-sm text-gray-400">Clienti soddisfatti dei nostri servizi</p>
+                </div>
+
+                <div className="border-t border-white/10 pt-6">
+                  <div className="text-3xl font-bold gradient-text mb-2">500+</div>
+                  <p className="text-sm text-gray-400">Eventi realizzati con successo</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
